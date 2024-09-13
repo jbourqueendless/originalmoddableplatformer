@@ -167,6 +167,20 @@ texture = SubResource("CompressedTexture2D_1pniu")
 position = Vector2(-1, -2)
 shape = SubResource("CircleShape2D_qggv3")
 
+[node name="Coin8" type="Area2D" parent="Coins"]
+position = Vector2(6275, 36)
+collision_layer = 2
+script = ExtResource("7_4w66y")
+
+[node name="Sprite2D" type="Sprite2D" parent="Coins/Coin8"]
+position = Vector2(510, -265)
+scale = Vector2(2.19531, 2.17969)
+texture = SubResource("CompressedTexture2D_1pniu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coins/Coin8"]
+position = Vector2(508, -264)
+shape = SubResource("CircleShape2D_qggv3")
+
 [node name="Platforms" type="Node2D" parent="."]
 position = Vector2(1920, -64)
 
@@ -245,3 +259,4 @@ position = Vector2(4096, 960)
 position = Vector2(4192, 320)
 
 [connection signal="body_entered" from="Coins/Coin2" to="Coins/Coin2" method="_on_body_entered"]
+[connection signal="body_entered" from="Coins/Coin8" to="Coins/Coin8" method="_on_body_entered"]
