@@ -18,7 +18,7 @@
 load_path = "res://.godot/imported/crystal.png-cf0477b384edb39c07379afbef4eba7e.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qggv3"]
-radius = 81.0062
+radius = 93.1343
 
 [node name="Main" type="Node2D"]
 
@@ -173,13 +173,29 @@ collision_layer = 2
 script = ExtResource("7_4w66y")
 
 [node name="Sprite2D" type="Sprite2D" parent="Coins/Coin8"]
-position = Vector2(510, -265)
+position = Vector2(365, -534)
+scale = Vector2(2.19531, 2.17969)
+texture = SubResource("CompressedTexture2D_1pniu")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coins/Coin8"]
+position = Vector2(362, -536)
+shape = SubResource("CircleShape2D_qggv3")
+
+[node name="Coin22" type="Area2D" parent="Coins"]
+position = Vector2(6275, 36)
+collision_layer = 2
+script = ExtResource("7_4w66y")
+
+[node name="Sprite2D" type="Sprite2D" parent="Coins/Coin22"]
+position = Vector2(15483, -4751)
 scale = Vector2(2.19531, 2.17969)
 texture = SubResource("CompressedTexture2D_1pniu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Coins/Coin8"]
-position = Vector2(508, -264)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coins/Coin22"]
+position = Vector2(15483, -4745)
 shape = SubResource("CircleShape2D_qggv3")
+metadata/_edit_group_ = true
 
 [node name="Platforms" type="Node2D" parent="."]
 position = Vector2(1920, -64)
@@ -260,3 +276,4 @@ position = Vector2(4192, 320)
 
 [connection signal="body_entered" from="Coins/Coin2" to="Coins/Coin2" method="_on_body_entered"]
 [connection signal="body_entered" from="Coins/Coin8" to="Coins/Coin8" method="_on_body_entered"]
+[connection signal="body_entered" from="Coins/Coin22" to="Coins/Coin22" method="_on_body_entered"]
