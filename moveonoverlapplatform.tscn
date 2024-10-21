@@ -1,0 +1,111 @@
+[gd_scene load_steps=19 format=3 uid="uid://c8r8p65203g2u"]
+
+[ext_resource type="Texture2D" uid="uid://cv56enncqcdlj" path="res://assets/tiles-d.png" id="1_bftbe"]
+[ext_resource type="Script" path="res://addons/block_code/block_code_node/block_code.gd" id="1_tx8kv"]
+[ext_resource type="Script" path="res://addons/block_code/serialization/block_serialization_tree.gd" id="2_v2gjq"]
+[ext_resource type="Script" path="res://addons/block_code/serialization/block_serialization.gd" id="3_itfj7"]
+[ext_resource type="Script" path="res://addons/block_code/serialization/value_block_serialization.gd" id="4_eb72u"]
+[ext_resource type="Script" path="res://addons/block_code/serialization/block_script_serialization.gd" id="5_7bkvv"]
+[ext_resource type="Script" path="res://addons/block_code/code_generation/variable_definition.gd" id="6_es0eh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ybjkx"]
+size = Vector2(278, 53)
+
+[sub_resource type="Resource" id="Resource_ks0qu"]
+script = ExtResource("3_itfj7")
+name = &"ready"
+children = Array[ExtResource("3_itfj7")]([])
+arguments = {}
+
+[sub_resource type="Resource" id="Resource_nchma"]
+script = ExtResource("2_v2gjq")
+root = SubResource("Resource_ks0qu")
+canvas_position = Vector2(54, 47)
+
+[sub_resource type="Resource" id="Resource_wrba7"]
+script = ExtResource("4_eb72u")
+name = &"area2d_on_entered:something"
+arguments = {}
+
+[sub_resource type="Resource" id="Resource_nf63a"]
+script = ExtResource("4_eb72u")
+name = &"is_node_in_group"
+arguments = {
+"group": "player",
+"node": SubResource("Resource_wrba7")
+}
+
+[sub_resource type="Resource" id="Resource_d4et3"]
+script = ExtResource("3_itfj7")
+name = &"call_method_group"
+children = Array[ExtResource("3_itfj7")]([])
+arguments = {
+"group": "animations",
+"method_name": ""
+}
+
+[sub_resource type="Resource" id="Resource_idjrm"]
+script = ExtResource("3_itfj7")
+name = &"if"
+children = Array[ExtResource("3_itfj7")]([SubResource("Resource_d4et3")])
+arguments = {
+"condition": SubResource("Resource_nf63a")
+}
+
+[sub_resource type="Resource" id="Resource_lflqg"]
+script = ExtResource("3_itfj7")
+name = &"area2d_on_entered"
+children = Array[ExtResource("3_itfj7")]([SubResource("Resource_idjrm")])
+arguments = {}
+
+[sub_resource type="Resource" id="Resource_dck34"]
+script = ExtResource("2_v2gjq")
+root = SubResource("Resource_lflqg")
+canvas_position = Vector2(125, 175)
+
+[sub_resource type="Resource" id="Resource_28vl6"]
+script = ExtResource("5_7bkvv")
+script_inherits = "Area2D"
+block_serialization_trees = Array[ExtResource("2_v2gjq")]([SubResource("Resource_nchma"), SubResource("Resource_dck34")])
+variables = Array[ExtResource("6_es0eh")]([])
+generated_script = "extends Area2D
+
+
+func _init():
+	body_entered.connect(_on_body_entered)
+
+func _ready():
+	pass
+
+func _on_body_entered(something: Node2D):
+
+	if ((something).is_in_group('player')):
+		get_tree().call_group('animations', '')
+
+"
+version = 0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k4jil"]
+size = Vector2(269, 72)
+
+[node name="elevator" type="AnimatableBody2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2, -6)
+shape = SubResource("RectangleShape2D_ybjkx")
+
+[node name="BlockCode" type="Node" parent="Area2D"]
+script = ExtResource("1_tx8kv")
+block_script = SubResource("Resource_28vl6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 42)
+texture = ExtResource("1_bftbe")
+region_enabled = true
+region_rect = Rect2(896.08, 126.242, 257.263, 127.757)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 16)
+shape = SubResource("RectangleShape2D_k4jil")

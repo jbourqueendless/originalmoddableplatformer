@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://djftcre6vrbp1"]
+
+[ext_resource type="Script" path="res://node_2d.gd" id="1_41fel"]
+[ext_resource type="Texture2D" uid="uid://b3o3mc7govlr8" path="res://assets/tiles-c.png" id="2_4jqfg"]
+
+[sub_resource type="Curve2D" id="Curve2D_71ibv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1014, -446, 0, 0, 0, 0, 472, -815, 0, 0, 0, 0, 68, -542, 0, 0, 0, 0, -20, 59, 0, 0, 0, 0, 658, 16, 0, 0, 0, 0, 1014, -446)
+}
+point_count = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnrgl"]
+size = Vector2(292.95, 146.276)
+
+[node name="PathPlat" type="Node2D"]
+position = Vector2(-2, -5)
+script = ExtResource("1_41fel")
+metadata/_edit_group_ = true
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_71ibv")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(1014, -446)
+rotation = 0.00801586
+rotates = false
+
+[node name="AnimatableBody2D" type="RigidBody2D" parent="Path2D/PathFollow2D"]
+position = Vector2(-6.02385, -2.95178)
+disable_mode = 2
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/AnimatableBody2D"]
+position = Vector2(4.95174, -6.03989)
+texture = ExtResource("2_4jqfg")
+region_enabled = true
+region_rect = Rect2(896.936, 127.962, 256.268, 127.201)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/AnimatableBody2D"]
+position = Vector2(10.8466, -12.1259)
+shape = SubResource("RectangleShape2D_lnrgl")
+one_way_collision = true
