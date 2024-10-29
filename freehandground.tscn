@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3sfok8u51pjy"]
+
+[ext_resource type="Texture2D" uid="uid://d3gouy3ror3bo" path="res://freehandground.png" id="1_mao1a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_61w06"]
+size = Vector2(1330, 136)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(666, 29)
+shape = SubResource("RectangleShape2D_61w06")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(661.75, -126)
+scale = Vector2(0.388398, 0.395968)
+texture = ExtResource("1_mao1a")
